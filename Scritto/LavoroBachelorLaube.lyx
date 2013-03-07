@@ -1,0 +1,5138 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options true
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author 245379786 "muffin" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\paragraph_spacing onehalf
+Gli effetti di diversi stimatori dei rendimenti attesi sul processo di ottimizza
+zione di Markowitz
+\end_layout
+
+\begin_layout Author
+\paragraph_spacing onehalf
+Marco Laube
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+set_width "auto"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList table
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Introduzione
+\end_layout
+
+\begin_layout Section*
+\paragraph_spacing onehalf
+Motivazione
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+La capacità dei soggetti economici di prevedere il futuro, o perlomeno di
+ stimare l’andamento di determinate grandezze, è in molti ambiti della scienza
+ economica di estrema importanza.
+ Tale affermazione risulta evidente se si prende in considerazione l'investiment
+o, una delle attività maggiormente studiate e analizzate in economica.
+ Per definizione, “ l'investimento è l’impiego attuale di denaro o risorse
+ con l’aspettativa di trarre benefici futuri “ (Bodie, Kane e Marcus (2011),
+ p.
+ 29).
+ Di conseguenza, tenendo in considerazione un comportamento razionale, un
+ investimento viene effettuato solo nel caso in cui i benefici futuri siano
+ maggiori del capitale impiegato , ossia i benefici attuali ottenuti dal
+ consumo istantaneo delle risorse.
+ Nel momento di decidere se impiegare o meno delle risorse in un progetto
+ d’investimento, l’individuo a cui è affidato tale compito deve essere in
+ grado di poter calcolare e confrontare questi due tipi di benefici.
+ Da una parte i benefici attuali sono conosciuti e facilmente riconoscibili.
+ Essi si identificano nel capitale a disposizione e nel suo potere d’acquisto
+ di beni di consumo.
+ L’investitore è in grado di ottenere tutte le informazioni necessarie per
+ definire esattamente il valore dei benefici attuali, potendo lui stesso
+ dare un giudizio ai benefici che può ottenere comprando qualcosa con il
+ capitale a disposizione.
+ D’altra parte i benefici futuri, proprio perché futuri, sono incerti.
+ È infatti ovvio come la conoscenza certa di eventi futuri, e quindi anche
+ dei benefici futuri, è confinata nel mondo delle fiabe o nella mente degli
+ ingenui frequentatori di chiromanti.
+ L’ incertezza è una conseguenza diretta della mancanza di informazione,
+ può essere dunque considerata come una forma di informazione incompleta,
+ imperfetta.
+ All’investitore manca dunque una parte delle informazioni necessarie per
+ poter definire correttamente i benefici futuri derivanti dall’attuazione
+ dell’investimento.
+ La difficoltà di prendere una decisione d’investimento risiede in definitiva
+ nel predire correttamente i suoi rendimenti futuri.
+ La previsione è infatti da considerare come quel procedimento di elaborazione
+ dati che permette di ottenere in modo più accurato possibile le caratteristiche
+ di eventi futuri.
+ Da tale riflessione emerge chiaramente l’importanza della previsione in
+ ambito economico.
+ Per questo lo studio e la compressione degli strumenti necessari per svolgere
+ una buona previsione non solo è di fondamentale importanza per l’economista,
+ ma risulta affascinante, perché mette in stretta relazione metodi matematici
+ e conoscenze economiche .
+ In conclusione, il motivo principale che mi porta a scrivere tale lavoro
+ risiede nel ruolo fondamentale della previsione in economia
+\end_layout
+
+\begin_layout Section*
+\paragraph_spacing onehalf
+Obiettivo 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+L'obiettivo di questo lavoro è quello di calcolare, utilizzando diverse
+ metodologie, i rendimenti attesi per le singole asset class incluse in
+ un portafoglio e analizzare l'effetto sul risultato del processo di massimizzaz
+ione di Markowitz che esercita la scelta della metodologia di calcolo dei
+ rendimenti attesi.
+ Il primo capitolo presenta gli strumenti finanziari che verranno usati
+ per creare il portafoglio da analizzare.
+ Tali strumenti verranno dapprima suddivisi in asset class, per poi in seguito
+ raccogliere e commentare i dati.
+ In relazione alla raccolta sarà trattato il problema della scelta del periodo
+ di separazione tra i singoli dati.
+ Attraverso tale procedere si darà importanza al concetto di diversificazione
+ e di minimizzazione del rischio.
+ Il secondo capitolo introduce i stimatori dei rendimenti attesi analizzati,
+ ossia la media storica, il rendimento a scadenza (Yield-to-Maturity, YTM)
+ e il rapporto tra prezzo e utili (Price to earning ratio, P/E).
+ Inizialmente si spiegherà la teoria alla base di ogni stimatore.
+ Successivamente si passerà al calcolo pratico e alla presentazione dei
+ rendimenti attesi dei strumenti finanziari esposti nel primo capitolo per
+ infine analizzarne la consistenza.
+ Il capitolo terzo presenta i risultati dell’ottimizzazione di Markowitz
+ eseguita con i tre diversi stimatori e fa un analisi iniziale delle differenze.
+ Partendo dalle constatazioni fatte nel capitolo precedente, quello conclusivo
+ analizza più a fondo i risultati, mettendoli in relazione a concetti teorici
+ e pratici quali l’informazione, le ipotesi di efficienza dei mercati e
+ il significato economico dello Sharpe ratio
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+
+\change_deleted 245379786 1359545518
+ 
+\change_unchanged
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\paragraph_spacing onehalf
+Gli strumenti finanziari
+\end_layout
+
+\begin_layout Section
+\paragraph_spacing onehalf
+La scelta degli strumenti finanziari
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+La minimizzazione del rischio
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Come evidenzia Harry Max Markowitz nel suo celebre articolo 
+\begin_inset Quotes eld
+\end_inset
+
+Portofolio selection
+\begin_inset Quotes erd
+\end_inset
+
+ sul Journal of Finance del 1952, la scelta dei strumenti finanziari è subordina
+ta alla minimizzazione del rischio.
+ Per poter far luce su questo principio si deve dapprima chiarire il concetto
+ di rischio in relazione ai rendimenti di uno strumento finanziario.
+ Data la caratteristica di incertezza dei rendimenti futuri, essi possono
+ essere considerati come una variabile aleatoria.
+ Tale incertezza è misurata dalla deviazione standard, ossia la deviazione
+ attesa delle realizzazioni della variabile aleatoria rispetto al valore
+ atteso.
+ È quindi chiaro come in presenza di una deviazione standard nulla non c'e'
+ incertezza
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In questo caso si è in presenza di una constante pari al valore atteso,
+ non più di una variabile aleatoria e quindi di una grandezza certa.
+ 
+\end_layout
+
+\end_inset
+
+ mentre al suo aumentare vi è pure un aumento dell'incertezza.
+ Il rischio di un singolo titolo può essere quindi misurato attraverso la
+ deviazione standard dei suoi rendimenti, essendo esso equivalente all'incertezz
+a di questi ultimi.
+ Ai fini di agevolare l'analisi che si prefigge questo lavoro
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+cfr.
+ 1.1.2 l'orizzonte temporale
+\end_layout
+
+\end_inset
+
+, una caratteristica fondamentale è inoltre la simmetria del rischio, anche
+ se alcuni studi empirici ne minano la validità, come per esempio quello
+ di Peirò (2002).
+ In altre parole, il rendimento atteso ha la stessa possibilità di deviare
+ rispetto alla media per la stessa misura sia in positivo, sia in negativo.
+ La variabile aleatoria che definisce i rendimenti di un titolo e' considerata
+ di consequenza come distribuita normalmente:
+\begin_inset Formula 
+\begin{equation}
+R\sim N(\mu_{r},\sigma_{r}^{2})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "R"
+description "variabile aleatoria relativa ai rendimenti"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "r"
+description "rendimento effettivo, oppure indice relativo ai rendimenti"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\mu$"
+description "valore atteso"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\sigma$"
+description "deviazione standard"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Il concetto di minimizzazione del rischio e' da intendere come la ricerca
+ della varianza minore dato un certo rendimento atteso.
+ Davanti alla scelta tra due titoli che promettono lo stesso rendimento,
+ l'investitore avverso al rischio sceglierà sempre il titolo con la deviazione
+ standard minore (Markowitz (1952a), p.82)
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+La diversificazione come strumento di diminuzione del rischio
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Il pensiero di Markowitz (1952a) non è limitato alla scelta tra due titoli.
+ Nella pratica l'investitore e' in grado di scegliere più titoli contemporaneame
+nte.
+ Esso dunque non e' solo interessato al rendimento e al rischio dei vari
+ titoli ma anche all'interazione dei rispettivi rendimenti attesi.
+ Infatti, se empiricamente si può dimostrare uno stretto legame tra due
+ titoli, nel senso che per esempio al rendimento positivo di uno l'altro
+ genera un rendimento negativo e viceversa, l'investitore può comprarli
+ entrambi ed evitare cosi delle perdite: il rendimento negativo di un titolo
+ viene bilanciato dal rendimento positivo dell'altro annullando di conseguenza
+ il rischio.
+ Intuitivamente si può affermare che più titoli si posseggono più il rischio
+ sopportato dall'investitore diminuisce e che di conseguenza la relazione
+ tra strumenti finanziari e la capacità dell'investitore di possederne contempor
+aneamente più di uno, detta anche diversificazione, sono fattori che contribuisc
+ono a tale diminuzione.
+ Per poter analizzare più a fondo questa affermazione sono necessari i concetti
+ di covarianza e portafoglio.
+ Come detto in precedenza, essendo i rendimenti di strumenti finanziari
+ delle variabili aleatorie, la loro interazione può essere descritta tramite
+ la covarianza 
+\begin_inset Formula $\sigma_{x,y}$
+\end_inset
+
+ o, nel caso di più di due titoli, la matrice di covarianza 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+ Il portafoglio è l'insieme di titoli posseduti da un investitore mentre
+ i suoi rendimenti sono la media pesata dei rendimenti dei titoli che lo
+ compongono.
+ Essendo tali rendimenti delle variabili aleatorie, lo è pure il rendimento
+ di un portafoglio
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+la somma dei pesi, ossia la somma delle componenti di 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\vec{w}$
+\end_inset
+
+, 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+è pari a uno
+\end_layout
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+R_{p}=\vec{w}^{T}\vec{R}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "p"
+description "indice relativo al portafoglio"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\vec{x}$"
+description "vettore"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "w"
+description "peso di un titolo all'interno di un portafoglio"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come qualsiasi altro investimento, anche un portafoglio presenta le caratteristi
+che base quali rendimento atteso 
+\begin_inset Formula $\mu_{p}$
+\end_inset
+
+ e varianza 
+\begin_inset Formula $\sigma_{p}^{2}$
+\end_inset
+
+.
+ Utilizzando le relative proprietà matematiche si ottiene:
+\begin_inset Formula 
+\begin{equation}
+\mu_{p}=\vec{w}^{T}E\left[\vec{R}\right]=\sum_{i=1}^{n}w_{i}R_{i}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{p}^{2}=\vec{w}^{T}\Sigma_{p}\vec{w}=\sum_{i=1}^{n}\sum_{j=1}^{n}w_{i}w_{j}Cov(R_{i},R_{j})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\Sigma$"
+description "matrice di covarianza"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "E[.]"
+description "operatore del valore atteso"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Var[.]"
+description "operatore della varianza"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Cov(.,.)"
+description "operatore della covarianza"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bodie, Kane e Marcus (2011, p.
+ 245) espongono il seguente metodo d'analisi per evidenziare la forza della
+ diversificazione.
+ Si assuma un portafoglio composto in egual misura da tutti i titoli, ossia
+ 
+\begin_inset Formula $w=\frac{1}{n}$
+\end_inset
+
+ dove n è il numero di titoli del portafoglio.
+ Cosiderando la formula algebrica della varianza del portafoglio e separando
+ le varianze dalle covarianze
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+La doppia sommatoria passa in rassegna tutti gli indici, e quindi per i=j
+ si ottiene
+\begin_inset Formula $w_{i}w_{i}\sigma_{i,j}=w_{i}^{2}\sigma_{i}^{2}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ La varianza del portafoglio non è altro che la somma delle singole varianze
+ dei titoli per i rispettivi pesi al quadrato più il doppio della somma
+ delle covarianze pesate.
+
+\lang italian
+ 
+\end_layout
+
+\end_inset
+
+ si ottiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{p}^{2}=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{n}\sigma_{i}^{2}+\sum_{\overset{i=1}{i\neq j}}^{n}\sum_{j=1}^{n}\frac{1}{n^{2}}\sigma_{i,j}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inserendo la varianza media 
+\begin_inset Formula $\overline{\sigma}^{2}=\frac{1}{n}\overset{n}{\underset{i=1}{\sum}}\sigma_{i}^{2}$
+\end_inset
+
+ e la covarianza media 
+\begin_inset Formula $\overline{\sigma}_{i,j}=\overset{n}{\frac{1}{n(n-1)}\underset{i\neq j}{\underset{i=1}{\sum}}}\sum_{j=1}^{n}\sigma_{i,j}$
+\end_inset
+
+ in (5) la varianza del nostro portofolio diventa:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{p}^{2}=\frac{1}{n}\overline{\sigma}^{2}+\frac{n-1}{n}\overline{\sigma}_{i,j}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\overline{x}$"
+description "media aritmetica"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\sigma_{x,y}$"
+description "covarianza tra x e y"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "$\\rho_{x,y}$"
+description "correlazione tra x e y"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Matematicamente la diversificazione non è altro che l'aumento del numero
+ di titoli finanziari n.
+ Con n
+\begin_inset Formula $\rightarrow\infty$
+\end_inset
+
+il fattore del primo termine tende a 0 mentre quello del secondo tende a
+ 1.
+ Di conseguenza la varianza del portafoglio sotto l'effetto di una forte
+ diversificazione, è la covarianza media dei titoli.
+ Escludendo alcune eccezioni
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+cercare in biblio Martin Wallmeier and Martin Diethelm.
+ Market pricing of exotic structured products: The case of multi-asset barrier
+ reverse convertibles in Switzerland.
+ Technical report, University of Fribourg, 2008.
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+per prodotti strutturati basati sul principio del worst-of come i multi-asset
+ barrier reverse convertibles al diminuire della correlazione si ha un aumento
+ del rischio, come evidenziato da Wallmeier e Diethelm (2008).
+\end_layout
+
+\end_inset
+
+, la diversificazione è quindi efficace nel minimizzare il rischio solo
+ nel momento in cui i titoli scelti presentano una bassa covarianza.
+ Markowitz (1952a, p.82) evidenzia come un portafoglio con molti titoli legati
+ ad una stessa industria, data l'elevata correlazione
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+per la correlazione vale 
+\begin_inset Formula $\rho_{x,y}=\frac{\sigma_{x,y}}{\sigma_{x}\sigma_{y}},$
+\end_inset
+
+ e quindi oltre al segno della relazione tra due variabili, rispetto alla
+ covarianza misura anche l'intensità
+\end_layout
+
+\end_inset
+
+ tra di essi, possono presentare un rapporto rendimento atteso/varianza
+ peggiore rispetto un singolo strumento finanziario e conclude che 
+\begin_inset Quotes eld
+\end_inset
+
+(...) in trying to make variance small it is not enough to invest in many securitie
+s.
+ It is necessary to avoid investing in securities with high covariances
+ among themselves.
+\begin_inset Quotes erd
+\end_inset
+
+ In conclusione, un investitore che vuole scegliere strumenti finanziari
+ con il fine di creare un portafoglio efficiente, ossia un portafoglio con
+ varianza minima dato il rendimento desiderato
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Si noti che ciò equivale a massimizzare il rendimendo dato il rischio da
+ sopportare
+\end_layout
+
+\end_inset
+
+, deve tener conto della relazione che i titoli scelti presentano.
+\end_layout
+
+\begin_layout Subsection
+Il metodo di scelta top-down: le asset classes
+\end_layout
+
+\begin_layout Standard
+Sostanzialmente per costruire un portafoglio si usa un processo 
+\begin_inset Quotes eld
+\end_inset
+
+Bottom-up
+\begin_inset Quotes erd
+\end_inset
+
+ o uno 
+\begin_inset Quotes eld
+\end_inset
+
+Top-down
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Il primo consiste nello scegliere direttamente gli strumenti finanziari
+ che sembrano attrattivi.
+ Attraverso tale metodologia risulta però difficile scegliere tenendo in
+ conto la relazione tra i vari titoli ed evitare così il pericolo di avere
+ un portafoglio troppo legato ad un'industria o a titoli positivamente correlati
+ (Bodie, Kane, Marcus (2011), p.37).
+ Il processo 
+\begin_inset Quotes eld
+\end_inset
+
+Top-down
+\begin_inset Quotes erd
+\end_inset
+
+ d'altro canto è in linea con il principio di diversificazione.
+ Gli attivi finanziari possono essere suddivisi in categorie tra di loro
+ poco correlate, come per esempio azioni, obbligazioni, materie prime, etc.
+ Tali categorie vengono chiamate asset class.
+ Una volta eseguita la categorizzazione degli strumenti finanziari, l'investitor
+e decide se e quanto investire in ciascuna classe.
+ Solo successivamente si appresta a scegliere i singoli titoli, magari dopo
+ aver eseguito un'ulteriore divisione delle classi in sottoclassi, per esempio
+ per industria, paese, etc.
+ (Bodie, Kane, Marcus (2011), p.36).
+ Tanto più bassa è la correlazione tra le classi tanto più il processo 
+\begin_inset Quotes eld
+\end_inset
+
+Top-down
+\begin_inset Quotes erd
+\end_inset
+
+ porta alla costruzione di un portafoglio efficiente.
+ 
+\end_layout
+
+\begin_layout Section
+Il portafoglio d'analisi
+\end_layout
+
+\begin_layout Subsection
+Gli strumenti e le asset classes
+\end_layout
+
+\begin_layout Standard
+I concetti di minimizzazione del rischio e diversificazione uniti al processo
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Top-down
+\begin_inset Quotes erd
+\end_inset
+
+ sono essenziali per poter costruire un portafoglio in grado di dare un
+ significato alle analisi svolte.
+ Ed è attenendosi a questi principi che si sono scelti i seguenti strumenti
+ finanziari:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="15" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Asset classes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Strumenti finanziari
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valuta
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Abbreviazione
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Risk Free
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Euro 3M 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuCash
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Short Term
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Svizzera 3M 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CHF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CHCash
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stati Uniti 3M 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USCash
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Obbligazioni governative
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Governativi 5 - 7 Anni Eu
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuGov
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Governativi 5 - 7 Anni US 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USGov
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Obbligazioni Corporate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Corporate US 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USCorp
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Corporate Eu
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuCorp
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High Yield
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High Yield US 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USHY
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High Yield Eu
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuHY
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mercati emergenti
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Emergenti diversificati
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Embi
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Obbligazioni convertibili
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Convertibili Europa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuConv
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Convertibili US&Canada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+US
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USCov
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Azioni
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dow Jones Euro STOXX 50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DJStoxx50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Standard and Poors 500 Composite
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+S&P500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Asset classes e strumenti finanziari del portafoglio d'analisi
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La classe 
+\series bold
+short term
+\series default
+, cosi come quella risk free, presenta degli indici relativi a franchi svizzeri
+ (Svizzera 3M), dollari americani ($) e euro.
+ Tali indici sono gestiti da JPMorgan e misurano il rendimento totale di
+ un investimento in un deposito bancario a scadenza costante di tre mesi
+ nella relativa moneta.
+ Sono dunque un'ottima rappresentazione della moneta quale strumento d'investime
+nto
+\end_layout
+
+\begin_layout Standard
+Nella classe 
+\series bold
+obbligazioni governative
+\series default
+, troviamo le obbligazioni governative americane, i cosidetti treasury bill,
+ e l'indice pesato delle obbligazioni europee di JPMorgan, ossia un indice
+ pesato contenente i maggiori titoli statali europei
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Per la composizione dettagliata si rimanda alla lista costituente presente
+ in Datastream
+\end_layout
+
+\end_inset
+
+, entrambi con scadenza tra i 5 e i 7 anni che misura i rendimenti totali.
+ Entrando nella categoria generale delle obbligazioni, i bond governativi
+ si differenziano da altri tipi perchè rappresentano un'istituzione pubblica,
+ che di principio ha caratteristiche diverse rispetto ad una società privata.
+ La grandezza e l'importanza a livello sociale e legislativo, soprattutto
+ nei paesi sviluppati, la rendono più stabile.
+ Le obbligazioni governative dunque hanno rendimenti e volatilità minori
+ rispetto ad altre.
+ Inoltre, la scelta di due strumenti relativi a due istituzioni distanti,
+ permette una diversificazione geografica.
+\end_layout
+
+\begin_layout Standard
+Tale tipo di diversificazione la si ritrova anche nella classe 
+\series bold
+obbligazioni corporate, 
+\series default
+dove vengono scelti due indici pesati, che misurano i rendimenti totali
+ e vengono gestiti da Bank of America e Merill Lynch, uno contenente le
+ obbligazioni con scadenza maggiore di un anno di aziende americane, l'altro
+ di aziende europee
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+sono escluse quelle britanniche
+\end_layout
+
+\end_inset
+
+.
+ La particolarità di questa asset class sta nel tipo di azienda la cui obbligazi
+one compare nell'indice.
+ Considerando le valutazioni Moody's, S&P, and Fitch esse presentano un
+ rating medio BBB o superiore, ossia sono molto stabili e con prospettive
+ di crescità.
+ Ciò le differenzia in termini di rendimento e volatilità rispetto ad aziende
+ a rischio di fallimento o in crisi.
+ Come per le obbligazioni governative quindi, si ha un effetto di diversificazio
+ne legato alla tipologia di istituzione.
+\end_layout
+
+\begin_layout Standard
+Le aziende a rischio vengono rappresentate nel portafoglio d'analisi attraverso
+ gli indici della classe 
+\series bold
+High Yield.
+ 
+\series default
+Tali indici, creati da Bank of America e Merill Lynch, presentano le stesse
+ caratteristiche degli indici corporate ma in questo caso il ranking medio
+ è inferiore a BBB.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Le classi summenzionate hanno finora preso in considerazione obbligazioni
+ di paesi in sviluppo.
+ L'indice pesato presente nella classe 
+\series bold
+Mercati emergenti
+\series default
+ e calcolato da JPMorgan, contiene una vasta gamma di obbligazioni emesse
+ in paesi in via di sviluppo.
+ Si è dunque di fronte ad una diversificazione geografica che, rispetto
+ a quella tra stati uniti e europa, è più marcata.
+ I paesi in via di sviluppo presentano infatti una situazione sociale ed
+ economica diversa rispetto ai paesi sviluppati e ciò determina delle caratteris
+tiche diverse in termini di rendimenti e rischio.
+\end_layout
+
+\begin_layout Standard
+Infine la classe 
+\series bold
+azioni
+\series default
+ contiene due famosi indici.
+ Il primo, il Dow Jones Euro Stoxx 50, rappresenta le 50 aziende europee
+ maggiormente capitalizzate Lo Standard and Poor 500 Composite invece è
+ un indice contenente 500 società americane scelte da un comitato attraverso
+ criteri quali la capitalizzazione, la liquidità e il settore.
+ Entrambi sono pesati rispetto alla capitalizzazione e considerano i rendimenti
+ totali, inclusi i dividendi.
+ La scelta di questi due indici segue il principio di diversificazione tra
+ Stati Uniti e Europa, già utilizzato per le varie classi di bond.
+ Il significato di questa asset class risiede nella diversa natura del rischio
+ di un'azione rispetto a quello di un'obbligazione.
+ Da un punto di vista teorico, le azioni hanno un livello di rischio più
+ elevato rispetto alle obbligazioni.
+ Infatti gli azionisti hanno il diritto al rendimento residuo e quindi sopportan
+o la maggior parte del rischio dell'azienda i cui ricavi vengono prima usati
+ per pagare i prestiti, tra cui figurano i detentori di obbligazioni.
+ Questo schema di retribuzione rende i debitori soggetti a un rischio legato
+ solo alla variazione dei tassi d'interesse e a una remota possibilità di
+ default.
+ Azioni e obbligazioni non differiscono solo per quello che riguarda il
+ rischio, ma anche per il tipo di rendimento.
+ Le prime hanno un rendimento variabile che dipende dalle scelte strategiche
+ dell'azienda, mentre le seconde hanno un rendimento fisso in forma di coupon.
+ Si è dunque di fronte a due diverse tipologie di strumenti finanziari,
+ che a rigor di logica vanno considerate in asset class diverse.
+\end_layout
+
+\begin_layout Subsection
+L'orizzonte temporale
+\end_layout
+
+\begin_layout Standard
+Se da un punto di vista teorico la costruzione del portafoglio sia consistente
+ con i principi di diversificazione e minimizzazione del rischio, è necessario
+ provarlo empiricamente attraverso l'analisi delle serie storiche degli
+ strumenti scelti.
+ Per far ciò si deve però prima di tutto risolvere il problema relativo
+ all'orizzonte temporale.
+ Le serie storiche si riferisco infatti al prezzo e quindi i rendimenti
+ devono essere dedotti.
+ La sceltà del lasso di tempo sul quale essi vanno calcolati è tutt'altro
+ che una pura formalità.
+ Un lasso di tempo lungo, come per esempio un anno, comporta dei rendimenti
+ attesi e una volatilità più elevati rispetto ad un orizzonte temporale
+ pìu corto.
+ Infatti, dato un certo rendimento atteso mensile, l'investitore si aspetta
+ di ottenere un rendimento annuale maggiore.
+ Se da un investimento di 100 CHF si ottiene mensilmente un rendimento atteso
+ di 1 CHF, che corrisponde all' 1%, senza tenere in conto il reinvestimento
+ di questo franco, alla fine dell'anno si avrà 12 CHF.
+ L'investimento di 100 CHF ha dunque un rendimento atteso annuale del 12%
+ a fronte di un rendimento atteso mensile del 1%.
+ Dal punto di vista della volatilità invece, un lasso di tempo più lungo
+ comporta un maggiore grado di incertezza, un maggiore rischio e quindi
+ una varianza del rendimento maggiore.
+ Matematicamente, tenendo in conto il reinvestimento, vale:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{t_{1}}=(1+R_{t_{2}})^{\frac{t_{1}}{t_{2}}}-1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{t_{1}}^{2}=\frac{t_{1}}{t_{2}}\sigma_{t_{2}}^{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "t"
+description "variabile che indica il tempo, può essere espresso in giorni, mesi, trimestri,anni,etc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Considerando i dati forniti da Datastream per il periodo tra il ...
+ e il ....
+ si può inoltre avere un riscontro empirico di quanto esposto:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="15" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Titoli
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu_{r}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma_{r}^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mese
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anno
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mese
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anno
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CHCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+USHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Embi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EuConv
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DJStoxx50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+S&P500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Orizzonte mensile e annuale a confronto
+\end_layout
+
+\end_inset
+
+:
+\begin_inset Formula $\mu_{r}$
+\end_inset
+
+ e 
+\begin_inset Formula $\sigma_{r}^{2}$
+\end_inset
+
+ sono stati calcolati tenendo conto dei rendimenti mensili e annuali, senza
+ utilizzare le formule (7) e (8).
+ Si noti come sia la varianza che il valore atteso sono maggiori, maggiore
+ è il lasso di tempo.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+cambiare periodo d'analisi, andare in bibblioteca
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per un'analisi significativa è richiesta una varianza il più possibile piccola.
+ Sembra dunque ottimale la scelta di un orizzonte temporale giornaliero,
+ se non addirittura infragiornaliero.
+ Il problema legato a questo lasso di tempo è la distribuzione asimmetrica
+ dei rendimenti giornalieri.
+ Un analisi empirica di tale caratteristicca è proposta da Peirò (2006).
+ Esaminando 24 azioni presenti nell'indice Dow Jones, conclude che 
+\begin_inset Quotes eld
+\end_inset
+
+the results obtained with daily returns detect some asymmetries, although
+ asymmetry does not seem to be a stylized fact characteristic of daily returns.
+ These asymmetries disappear almost completely in weekly or monthly returns,
+ as the distributions converge to normality
+\begin_inset Quotes erd
+\end_inset
+
+ (Peirò, p.
+ 145).
+ Le motivazioni teoriche della distribuzione asimmetrica dei rendimenti
+ sono esposte e analizzate nel lavoro di Bekaert e Wu (2000).
+ Partendo da diversi studi, essi espongono quali cause l'effetto leva
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+si veda Christie(1982)
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+referenze biblio in note
+\end_layout
+
+\end_inset
+
+e la variazione temporale del premio al rischio
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+si veda French,Schwert e Stambaugh(1987) oppure Campbell e Hentschel(1992)
+\end_layout
+
+\end_inset
+
+ ed individuano nel presentarsi di buone o cattive notizie l'effetto scatenante
+ (Bekaert, Wu (2000), p.
+ 6).
+ Le notizie sono descritte come shock, ossia eventi che hanno un forte effetto
+ nel breve termine e nessuno nel lungo.
+ Ciò sembra supportare da un punto di vista teorico i risultati di Peirò:
+ l'asimmetria del rischio generata da uno shock quale una notizia è più
+ presente in rendimenti con un lasso temporale corto rispetto a quelli con
+ uno lungo.
+ La distribuzione asimmetrica dei rendimenti crea per l'analisi svolta un
+ inutile complicazione.
+ Infatti, ponendo l'attenzione sui rendimenti attesi si può considerare
+ la varianza simmetrica senza correre il rischio di influenzare i risultati.
+\end_layout
+
+\begin_layout Standard
+In conclusione, per un'analisi efficace i rendimenti devono avere un orizzonte
+ temporale non troppo lungo ma neanche troppo corto.
+ Per questo motivo, l'orizzonte temporale scelto sarà il trimestre.
+\end_layout
+
+\begin_layout Subsection
+La correlazione degli strumenti
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="14">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+CHCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+Embi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuConv
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+DJStoxx50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+S&P500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+CHCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USCash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USGov
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuCorp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+USHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuHY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+Embi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+EuConv
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+DJStoxx50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size tiny
+S&P500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+La correlazione degli strumenti finanziari del portafoglio d'analisi
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Gli stimatori
+\end_layout
+
+\begin_layout Section
+Elementi di statistica
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Non è l'obbiettivo di questo scritto essere un trattato di statistica, ma
+ trovo giusto esporre alcuni concetti chiave per poter eseguire l'analisi
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+nota da mettere nell'introduzione???
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Variabile aleatoria, stimatore e realizzazione
+\end_layout
+
+\begin_layout Standard
+Per presentare, comprendere e analizzare uno stimatore occorre dapprima
+ evidenziare la differenza tra esso, variabile aleatoria ed realizzazione.
+ Dato uno spazio probabilistico 
+\begin_inset Formula $\left(\Omega,\xi,P\right)$
+\end_inset
+
+, la variabile aleatoria è una funzione che ordina tutti gli elementi di
+ 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, ossia l'intera popolazione, ad un valore numerico mantendo inalterata
+ la legge di probabilità P
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+in termini matematici, la variabile aleatoria è una funzione misurabile
+ (Ortelli (2011), p.33)
+\end_layout
+
+\end_inset
+
+.
+ Per esempio, per quanto riguarda il lancio di un dado, la variabile aleatoria
+ ordina ad ogni faccia il valore numerico corrisposto.
+ Ogni evento osservato appartentete alla popolazione è detto realizzazione
+ della variabile aleatoria.
+ Nel caso del dado, una realizzazione è il mostrasi di una determinata faccia
+ una volta lanciato il dado.
+ Ogni variabile aleatoria è caratterizata da dei paramentri, in genere i
+ momenti e i momenti centrati, tra i quali troviamo il valore atteso e la
+ varianza.
+ Tali parametri sono di regola sconosciuti.
+ 
+\end_layout
+
+\begin_layout Standard
+Uno stimatore è una statistica
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+una statistica è 
+\begin_inset Quotes eld
+\end_inset
+
+una funzione di variabili aleatorie osservabili che non dipende da alcun
+ parametro incognito
+\begin_inset Quotes erd
+\end_inset
+
+ (Ortelli (2011), p.42)
+\end_layout
+
+\end_inset
+
+ che ha come scopo stimare un parametro della variabile aleatoria.
+ Essendone una funzione, lo stimatore è a sua volta una variabile aleatoria
+ e quindi possiede anch'esso varianza e valore atteso.
+ La realizzazione di uno stimatore, detta anche stima, è il valore ottenuto
+ calcolando le realizzazioni delle variabili aleatore secondo la funzione
+ che lo definisce.
+ Per ottenere una realizzazione di uno stimatore si deve dunque osservare
+ per ognuna variabile aleatoria una realizzazione.
+ Tale insieme è detto n-campione, dove la numerosità n indica il numero
+ di variabili aleatorie che descrivono lo stimatore .
+ È importante notare la differenza stimatore e stima, il primo di carattere
+ aleatorio, il secondo deterministico (Ortelli (2011)).
+\end_layout
+
+\begin_layout Subsection
+Correttezza e consistenza di uno stimatore
+\end_layout
+
+\begin_layout Standard
+Le proprietà principali di uno stimatore sono la correttezza e la consistenza.
+ Uno stimatore 
+\begin_inset Formula $\hat{\theta}$
+\end_inset
+
+ di un parametro 
+\begin_inset Formula $\theta$
+\end_inset
+
+ è detto corretto se vale:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E\left[\hat{\theta}\right]=\theta
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Uno stimatore è detto consistente se è corretto e vale:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\lim_{n\rightarrow\infty}Var\left[\hat{\theta}\right]=0
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+per la dimostrazione cfr (Ortelli (2011), p.116
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Uno stimatore corretto e consistente presenta asintoticamente le stesse
+ caratteristiche del parametro stimato.
+ Infatti, essendo una costante, tale parametro ha varianza nulla.
+ Queste caratteristiche sono essenziali per poter svolgere l'inferenza e
+ trarre delle conclusioni significative dall'analisi statistica eseguita
+ mediante lo stimatore.
+\end_layout
+
+\begin_layout Subsection
+Inferenza e varianza
+\end_layout
+
+\begin_layout Standard
+L'inferenza non è altro che l'analisi delle proprietà di una variabile aleatoria
+ basandosi sulle sue realizzazioni.
+ Gli strumenti principali sono il test per un'ipotesi statistica e l'intervallo
+ di confidenza.
+ Il primo determina, attraverso un procedimento o regola, se una data ipotesi,
+ detta ipotesi nulla, può esser accettata oppure rifiutata (Ortelli (2011),
+ p.
+ 123).
+ Il secondo indica con quale probabilità, o livello il parametro analizzato
+ rientra nel intervallo dato.
+ Per esempio, se l'intervallo di confidenza al 95% per il vero ma sconosciuto
+ valore di 
+\begin_inset Formula $\mu$
+\end_inset
+
+ è 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+, diremmo che siamo confidenti al 95% che 
+\begin_inset Formula $\mu$
+\end_inset
+
+ è compreso tra 1 e 2 (Ortelli (2011), p.91).
+ L'elaborazione tecnica di tali strumenti statistici necessita della varianza
+ e della covarianza, nel caso di test su più stimatori.
+ Essendo questo lavoro concentrato sul valore atteso dei rendimenti e la
+ loro stima, la varianza e le varie covarianze vengono considerate come
+ costanti.
+ Come il valore atteso, esse sono sconosciute e quindi, al fine di poter
+ eseguire l'analisi statistica, si utilizzano quali varianze e covarianze,
+ le realizzazioni dei seguenti stimatori:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{\sigma}_{x}^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{\sigma}_{x,y}=\frac{1}{n-1}\sum_{i=1}^{n}\left(Y_{i}-\overline{Y}\right)\left(X_{i}-\overline{X}\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Questi stimatori sono asintoticamente corretti e consistenti (Ortelli (2011),
+ p.
+ 103).
+ Dato il buon numero di dati raccolti, l'utilizzo delle realizzazioni di
+ tali stimatori permette di eseguire l'inferenza.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "x"
+description "realizzazione della variabile aleatoria X"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+La media storica
+\end_layout
+
+\begin_layout Subsection
+Le proprietà statistiche
+\end_layout
+
+\begin_layout Standard
+Trasponendo i concetti teorici trattati nel primo paragrafo della sezione
+ precedente al caso qui trattato in esame, il parametro da stimare è il
+ valore atteso 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\mu_{r}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang italian
+ della variabile aleatoria dei rendimenti 
+\begin_inset Formula $R$
+\end_inset
+
+ come descritta da (1.1).
+ Il primo stimatore scelto è la media storica.
+ Date delle osservazioni 
+\begin_inset Formula $x$
+\end_inset
+
+
+\begin_inset Formula $_{t}$
+\end_inset
+
+ avvenute a intervalli regolari nel tempo, la media storica è definita:
+\begin_inset Formula 
+\begin{equation}
+\overline{x}=\frac{1}{n}\sum_{i=1}^{n}x_{t}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le osservazioni non sono altro che i rendimenti calcolati dalle serie storiche,
+ la cui media storica è definita nel seguente modo:
+\begin_inset Formula 
+\begin{equation}
+\overline{r}=\frac{1}{n}\sum_{i=1}^{n}r_{t}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I rendimenti 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ sono dunque la realizzazione della variabile aleatoria 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+ e 
+\begin_inset Formula $\overline{r}$
+\end_inset
+
+ non è altro che una realizzazione del seguente stimatore:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\overline{R}=\frac{1}{n}\sum_{i=1}^{n}R_{t}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "n"
+description "una numerosità, che può indicare a dipendenza del contesto, il numero di titoli, di periodi, etc. "
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Questo stimatore, come ogni variabile aleatoria, possiede anch'essa un valore
+ atteso e una varianza:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mu_{\overline{R}}=E\left[\overline{R}\right]=E\left[\frac{1}{n}\sum_{t=1}^{n}R_{t}\right]=\frac{1}{n}\sum_{i=1}^{n}E\left[R_{t}\right]=\frac{1}{n}\sum_{i=1}^{n}\mu_{t}=\overline{\mu}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{\overline{R}}^{2}=Var\left[\frac{1}{n}\sum_{i=1}^{n}R_{t}\right]=\frac{1}{n^{2}}\left(\sum_{i=1}^{n}Var\left[R_{t}\right]+\sum_{t_{1}=1}^{n}\sum_{t_{2}=1}^{n}Cov(R_{t_{1}},R_{t_{2}})\right)
+\end{equation}
+
+\end_inset
+
+e quindi
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+cfr, equazione (1.6)
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{\overline{R}}^{2}==\frac{1}{n}\overline{\sigma}_{r_{t}}^{2}+\frac{n-1}{n}\overline{\sigma}_{r_{t_{1}},r_{t_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "i.i.d."
+description "dall'inglese \"indipendent and identically distributed\", ossia identiche e indipendentemente distribuite"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il punto centrale dello media storica è la caratteristica delle variabili
+ aleatorie 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+ che la compongono.
+ Facendo riferimento ad un unico titolo, si possono considerare 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ come le realizzazioni di un'unica variabile aleatoria, e quindi 
+\begin_inset Formula $R_{t}\sim R\sim N(\mu_{r},\sigma_{r}^{2})$
+\end_inset
+
+ .
+ In sostanza, si considera la distribuzione di 
+\begin_inset Formula $R$
+\end_inset
+
+ costante nel tempo, ossia i suoi parametri 
+\begin_inset Formula $\mu_{r}$
+\end_inset
+
+ e 
+\begin_inset Formula $\sigma_{r}^{2}$
+\end_inset
+
+ non dipendono da t.
+ Ne segue che 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+ sono indipendenti e identicamente distribuite (i.i.d) e quindi, oltre ad
+ avere la stessa varianza e lo stesso valore atteso, per la covarianza vale
+ 
+\begin_inset Formula $\overline{\sigma}_{r_{t_{1}},r_{t_{2}}}=0$
+\end_inset
+
+.
+ Il valore atteso e la varianza di 
+\begin_inset Formula $\overline{R}$
+\end_inset
+
+ si semplificano nel seguente modo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mu_{\overline{R}}=\frac{1}{n}\sum_{i=1}^{n}\mu_{t}=\frac{\mu_{r}}{n}\sum_{i=1}^{n}1=\mu_{r}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\sigma_{\overline{R}}^{2}=\frac{1}{n}\overline{\sigma}_{r_{t}}^{2}+\frac{n-1}{n}0=\frac{\sigma_{r}^{2}}{n}\sum_{i=1}^{n}\frac{1}{n}=\frac{\sigma_{r}^{2}}{n}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quanto esposto non è altro che l'enunciato, e la relativa dimostrazione,
+ della legge (debole) dei grandi numeri (Ortelli (2011), p.
+ 84)
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Siano 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ i.i.d, allora 
+\begin_inset Formula $\overline{X}\sim N(\mu_{x},\frac{\sigma_{x}^{2}}{n})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ L'equazione (2.11) evidenzia come la media storica è uno stimatore corretto.
+ Esso è inoltre consistente.
+ Infatti, considerando l'equazione (2.12), con 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ vale 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\sigma_{\overline{R}}^{2}=\frac{\sigma_{r}^{2}}{n}=0$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang italian
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+La media storica dei rendimenti dei titoli del portafoglio d'analisi
+\end_layout
+
+\begin_layout Subsection
+Vantaggi e svantaggi
+\end_layout
+
+\begin_layout Standard
+Il vantaggio principale sono le proprietà di correttezza e consistenza che
+ permettono di effettuare l'inferenza e trarre delle conclusioni dall'analisi
+ dei dati.
+ Senza queste proprietà la media storica non ha nessun valore pratico.
+ La correttetta e la consistenza dello stimatore sottolineano come questo
+ rappresenti ottimamente i rendimenti attesi.
+ Lo svantaggio principale risiede nell'assunzione che i rendimenti osservato
+ a intervalli regolari 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ siano realizzazioni di variabili aleatorie i.i.d., o meglio che la distribuzione
+ di 
+\begin_inset Formula $R$
+\end_inset
+
+ sia costante nel tempo.
+ Tale assunzione non solo sembra intuitivamente economicamente corretta,
+ ma conferisce allo stimatore le sue proprietà statistiche.
+ Senza infatti, non si potrebbe applicare la legge (debole) dei grandi numeri
+ e i parametri dello stimatore risulterebbero essere quelli definiti dalle
+ equazioni (2.9) e (2.10), per cui vale in generale:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mu_{\overline{R}}=\overline{\mu}\neq\mu_{r}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\lim_{n\rightarrow\infty}\sigma_{\overline{R}}^{2}=\lim_{n\rightarrow\infty}(\frac{1}{n}\overline{\sigma}_{r_{t}}^{2}+\frac{n-1}{n}\overline{\sigma}_{r_{t_{1}},r_{t_{2}}})=\overline{\sigma}_{r_{t_{1}},r_{t_{2}}}\neq0
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lo stimatore non è più nè corretto nè consistente.
+ Per poter utilizzare la media storica si deve quindi giustificare economicament
+e che la distribuzione di 
+\begin_inset Formula $R$
+\end_inset
+
+, e quindi anche 
+\begin_inset Formula $\mu_{r}$
+\end_inset
+
+, non dipendono dal tempo.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Riferimenti Bibliografici
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Portofolio selection Markowitz"
+key "key-1"
+
+\end_inset
+
+Bodie, Z., Kane, A.
+ e Marcus, A.
+ (2011).
+ Investments and Portfolio Management, New York, McGraw-Hill/Irwin
+\end_layout
+
+\begin_layout Standard
+Portofolio selection Markowitz
+\end_layout
+
+\begin_layout Standard
+An analysis of variance test for normality(complete samples) Shapiro Wilk
+\end_layout
+
+\begin_layout Standard
+Amado Peirò, skewness in individual stocks at different investment horizont,
+ Quantitative Finance,
+\end_layout
+
+\begin_layout Standard
+https://www.oppenheimerfunds.com/articles/article_05-17-12-123628.jsp 1.2.2013
+\end_layout
+
+\begin_layout Standard
+http://research.stlouisfed.org/fred2/series/BAMLHYH0A0HYM2TRIV 1.2.2013
+\end_layout
+
+\begin_layout Standard
+http://www.standardandpoors.com/servlet/BlobServer?blobheadername3=MDT-Type&blobco
+l=urldata&blobtable=MungoBlobs&blobheadervalue2=inline%3B+filename%3Dfs-sp-500-l
+tr.pdf&blobheadername2=Content-Disposition&blobheadervalue1=application%2Fpdf&blo
+bkey=id&blobheadername1=content-type&blobwhere=1244142397091&blobheadervalue3=UT
+F-8 1.2.2013
+\end_layout
+
+\begin_layout Standard
+http://www.stoxx.com/indices/index_information.html?symbol=sx5E 1.2.2013
+\end_layout
+
+\begin_layout Standard
+studies of stock price volatility changes, Fischer Black
+\end_layout
+
+\begin_layout Standard
+asymmetric volatility and risk in equity markets, Bekaert G., Wu G.
+ 2000
+\end_layout
+
+\begin_layout Standard
+The stochastic behavior of common stock variances: Value, leverage and interest
+ rate effects, Christie (1982)
+\end_layout
+
+\begin_layout Standard
+expected stock returns and vlatility French, Schwert, Stambaugh
+\end_layout
+
+\begin_layout Standard
+No News is Good News: An Asymmetric Model of Changing Volatility in Stock
+ Returns Campbell Hentschel (1992)
+\end_layout
+
+\begin_layout Standard
+Appunti del corso di statistica II, Ortelli (2011)
+\end_layout
+
+\end_body
+\end_document

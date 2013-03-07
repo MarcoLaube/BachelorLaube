@@ -1,0 +1,24 @@
+Name;alMax;alMax;alMax;alMax;alMax;alMax;alMax;alMax;alMax
+Value;1;1;1;1;1;1;1;1;1
+CLASS RISK FREE;;;;;;;;;
+Euro Cash 3M;1;1;1;1;1;1;1;1;1
+CLASS SHORT TERM;;;;;;;;;
+Switzerland Cash 3M;1;1;1;1;1;1;1;1;1
+United States Cash 3M;1;1;1;1;1;1;1;1;1
+CLASS GOVERNMENT BOND;;;;;;;;;
+European Monetary Union Government 5 - 7 Years (E);1;1;1;1;1;1;1;1;1
+United States Treasury 5 - 7 Years ($);1;1;1;1;1;1;1;1;1
+CLASS CORPORATE INV. GRADE;;;;;;;;;
+United States Corporate BBB-A ($);1;1;1;1;1;1;1;1;1
+European Monetary Union Corporate Excluding Pfand. BBB (E);1;1;1;1;1;1;1;1;1
+CLASS HIGH YIELD;;;;;;;;;
+United States High Yield Master II. ($);1;1;1;1;1;1;1;1;1
+European Currency Highyield (E);1;1;1;1;1;1;1;1;1
+CLASS EMERGING BOND;;;;;;;;;
+Embi Global Diversified Composite ($);1;1;1;1;1;1;1;1;1
+CLASS CONVERTIBLE BOND;;;;;;;;;
+Convertible: European Monetary Union (E);1;1;1;1;1;1;1;1;1
+United States and Canada Convertible Bond ($);1;1;1;1;1;1;1;1;1
+CLASS EQUITY ;;;;;;;;;
+Dow Jones Euro STOXX 50 (E);1;1;1;1;1;1;1;1;1
+Standard and Poors 500 Composite ($);1;1;1;1;1;1;1;1;1

@@ -1,0 +1,23 @@
+Name; Constraints.value
+CLASS RISK FREE;
+Euro Cash 3M;EUR
+CLASS SHORT TERM;
+Switzerland Cash 3M;CHF
+United States Cash 3M;USD
+CLASS GOVERNMENT BOND;
+European Monetary Union Government 5 - 7 Years (E);EUR
+United States Treasury 5 - 7 Years ($);USD
+CLASS CORPORATE INV. GRADE;
+United States Corporate BBB-A ($);USD
+European Monetary Union Corporate Excluding Pfand. BBB (E);EUR
+CLASS HIGH YIELD;
+United States High Yield Master II. ($);USD
+European Currency Highyield (E);USD
+CLASS EMERGING BOND;
+Embi Global Diversified Composite ($);EUR
+CLASS CONVERTIBLE BOND;
+Convertible: European Monetary Union (E);USD
+United States and Canada Convertible Bond ($);EUR
+CLASS EQUITY ;
+Dow Jones Euro STOXX 50 (E);USD
+Standard and Poors 500 Composite ($);EUR
