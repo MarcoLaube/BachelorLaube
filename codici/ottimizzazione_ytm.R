@@ -1,14 +1,15 @@
-#definizione periodo in cui si eseguono le ottimizzazioni,il nr di rendimenti utilizzati per la media storica,la stdev obiettivo e il suo errore
-inizio<-'2008 Q2'
-fine<-'2012 Q4'
-nrperiodi<-length(seq(as.yearqtr(inizio,format ="%Y Q%q"),as.yearqtr(fine,format ="%Y Q%q"),by=0.25))
-nrrendimentixmedia<-10
-stdevtarget<-0.04
-errortarget<-0.1 #in %
-
 #cartella e libreria zoo per dataframe con serie storiche
 setwd("C:\\R\\r-output")
 library(zoo)
+
+#definizione periodo in cui si eseguono le ottimizzazioni,il nr di rendimenti utilizzati per la media storica,il doppio dell'errore consentito per il sharpe massimo
+inizio<-'2001 Q3'
+fine<-'2012 Q4'
+nrperiodi<-length(seq(as.yearqtr(inizio,format ="%Y Q%q"),as.yearqtr(fine,format ="%Y Q%q"),by=0.25))
+nrrendimentixmedia<-10
+errortarget<-0.02 #in %
+
+
 
 #dataframe stdev obiettivo (per controllare l'errore tra la varianza obiettivo)
 stdev<-matrix(,ncol=1,nrow=nrperiodi)
@@ -43,11 +44,11 @@ system.time(for (i in index(pesi)){
 			ytmtrimestrali<-aggregate(ytm,as.yearqtr,tail,1)
 			aspettative<-ytmtrimestrali[as.yearqtr(i,format="%Y Q%q")-0.25,]
 			
-			riniziale<-as.numeric(aspettative[1,1])+0.001 #rendimento iniziale quello dell'Euro Cash perchè per caratteristiche si avvicina maggiormente al minvar (nell'ottimizzazione non vengono calcolati portofoglio con sharpe negativo)
+			riniziale<-as.numeric(aspettative[2,1])+0.001 #rendimento iniziale quello dell'Euro Cash perchè per caratteristiche si avvicina maggiormente al minvar (nell'ottimizzazione non vengono calcolati portofoglio con sharpe negativo)
 			rfinale<-as.numeric(max(aspettative))-0.001
 			
 #inizializzazione errore permesso alla varianza per condizione while
-			error<-0.2
+			error<-10000
 			
 			while(error>errortarget){
 				
@@ -60,12 +61,12 @@ system.time(for (i in index(pesi)){
 				orizzonteExpectedReturns<-1
 				rendimentoMinimo<-riniziale
 				rendimentoMassimo<-rfinale# il rendimento obiettivo è la media, in seguito da ottimizSenzaBench si userà il secondo elemento
-				nrOttimizzazioni<-3
+				nrOttimizzazioni<-4
 				relativeOptimisation<-1
 				idRiskFree<-"Euro Cash 3M"
 				conVincoloBenchmark<-1
 				df_vincoliMultipliNomi<-read.csv2("vincolimultiplinomi.csv",header=T,stringsAsFactors = F) #il df non e' come nell'esempio, se c'e' un problema controllare (il problema è sorto, risolto con stringsAsFactors =F)
-				df_vincoliSemplici<-read.csv2("vincolisemplici.csv",header=T)
+				df_vincoliSemplici<-read.csv2("vincolisemplicisenzaRiskFree.csv",header=T)
 				df_vincoliMultipliDati<-read.csv2("vincolimultiplidati.csv",header=T)[-1]
 				names(df_vincoliMultipliDati)<-c("alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax")
 				
@@ -2086,7 +2087,7 @@ system.time(for (i in index(pesi)){
 				## create the P matrix containing the optimal portfolio weights. The columns of
 				## the matrix contain the optimal weights given the desired level of expected return.
 				ottimizSenzaBench$P = matrix(, ncol = nbOptimizations, nrow = datiVincoliQuadProg$nrPesi)
-				dimnames(ottimizSenzaBench$P) <- list(colnames(m.aspettative),paste("E[R] = ",round(reportingScaleFactor*r.range*100,digits=2),"%",sep=""))
+				dimnames(ottimizSenzaBench$P) <- list(colnames(m.aspettative),paste("E[R] = ",round(reportingScaleFactor*r.range*100,digits=4),"%",sep="")) #round a 4 cifre perche' seno' la ricerca binaria si blocca
 				ottimizConBench$P = ottimizSenzaBench$P
 				
 				
@@ -2325,10 +2326,11 @@ system.time(for (i in index(pesi)){
 				stdev[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,2]
 				error<-abs(100*ottimizSenzaBench$optimalStdev[2,2]-100*stdevtarget)
 				
-#Ridefinizione estremi dei rendimenti secondo algoritmo search (primo if evita che l'algoritmo cerchi i rendimenti con la var desiderata ma con sharp negativo)
-				
-				
-				if (ottimizSenzaBench$optimalStdev[2,2]<stdevtarget) riniziale<-(rfinale+riniziale)/2 else (rfinale<-(rfinale+riniziale)/2)
+#Ridefinizione estremi dei rendimenti secondo algoritmo di massimizzazione "intervall reduction" (che non ha bisogno delle derivate)
+
+if (ottimizSenzaBench$optimalStdev[2,3]>ottimizSenzaBench$optimalStdev[3,3]) rfinale<-ottimizSenzaBench$optimalStdev[3,1] else riniziale<-ottimizSenzaBench$optimalStdev[2,1]
+error<-abs(ottimizSenzaBench$optimalStdev[2,3]-ottimizSenzaBench$optimalStdev[3,3])
+
 				
 				
 			}

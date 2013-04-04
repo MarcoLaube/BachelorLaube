@@ -19,6 +19,12 @@ sharpeeffettivo<-matrix(,ncol=1,nrow=nrperiodi)
 sharpeeffettivo<-zooreg(sharpeeffettivo,start=as.yearqtr(inizio,format ="%Y Q%q"),end=as.yearqtr(fine,format ="%Y Q%q"),frequency=4)
 names(sharpeeffettivo)<-"Sharpe Ratio Effettivo"
 
+#dataframe sharpe effettivo
+msquare<-matrix(,ncol=1,nrow=nrperiodi)
+msquare<-zooreg(msquare,start=as.yearqtr(inizio,format ="%Y Q%q"),end=as.yearqtr(fine,format ="%Y Q%q"),frequency=4)
+names(msquare)<-"Msquare"
+varianzatargetmsquare<-4 #in percentuale
+
 
 #riordino dati giornalieri, tolgo le valute e rimetto a posto il EuYH (che mi dava problemi quando esportavo la serie storica da excel in txt, le tabulazioni non combaciavano, falsandomi tutti i dati seguenti, cosi l'ho messa alla fine
 datigiornalieri<-read.zoo("dati.txt", format ="%d.%m.%Y") 
@@ -57,6 +63,8 @@ covarianze<-cov(rendimentixcov)
 stdeveffettiva[as.yearqtr(i,format="%Y Q%q"),]<-(pesi[as.yearqtr(i,format="%Y Q%q"),]%*%covarianze%*%t(pesi[as.yearqtr(i,format="%Y Q%q"),]))^0.5
 
 sharpeeffettivo[as.yearqtr(i,format="%Y Q%q"),]<-(reffettivi[as.yearqtr(i,format="%Y Q%q"),]-rendimentiannualizzati[as.yearqtr(i,format="%Y Q%q"),1])/stdeveffettiva[as.yearqtr(i,format="%Y Q%q"),]
+
+msquare[as.yearqtr(i,format="%Y Q%q"),]<-rendimentiannualizzati[as.yearqtr(i,format="%Y Q%q"),1]+sharpeeffettivo[as.yearqtr(i,format="%Y Q%q"),]*varianzatargetmsquare
 }
 )
 
@@ -73,6 +81,7 @@ stdev<-100*round(stdev, digits=4)
 stdeveffettiva<-round(stdeveffettiva, digits=2)
 sharpeeffettivo<-100*round(sharpeeffettivo,digits=4)
 reffettivi<-100*round(reffettivi, digits=4)
+msquare<-100*round(msquare, digits=4)
 
 #merge
 sharpe<-merge(sharpe,sharpeeffettivo)
@@ -85,7 +94,7 @@ risultatistorici$pesi<-pesi
 risultatistorici$sharpe<-sharpe
 risultatistorici$rporto<-rporto
 risultatistorici$stdev<-stdev
-
+risultatistorici$msquare<-msquare
 
 
 
