@@ -38,7 +38,7 @@ names(rporto)<-"Rendimento Portofolio Atteso"
 
 system.time(for (i in index(pesi)){
 #da debuggare quando non si fa partire il for
-#i<-'2012 Q4'
+#i<-'2001 Q4'
 
 #comandi per calcolare le aspettative, il riskfree  e la massima vanno a costituire il range di rendimenti per l'ottimizzatore
 rendimentigeometrici<-function(x) {diff(log(x))}
@@ -55,6 +55,10 @@ aspettative<-apply(campionerendimenti,2,FUN=mean) #calcolo media storica
 riniziale<-as.numeric(aspettative[2])+0.001 #rendimento iniziale quello dell'Euro Cash perchè per caratteristiche si avvicina maggiormente al minvar (nell'ottimizzazione non vengono calcolati portofoglio con sharpe negativo)
 rfinale<-as.numeric(max(aspettative))-0.001
 
+#errore e stdev target
+errortarget<-0.1 #in %
+stdevtarget<- 0.04
+
 #inizializzazione errore permesso alla varianza per condizione while
 error<-100000
 
@@ -68,12 +72,12 @@ reportingHorizon<-1
 orizzonteExpectedReturns<-1
 rendimentoMinimo<-riniziale
 rendimentoMassimo<-rfinale# il rendimento obiettivo è la media, in seguito da ottimizSenzaBench si userà il secondo elemento
-nrOttimizzazioni<-4
+nrOttimizzazioni<-3
 relativeOptimisation<-1
 idRiskFree<-"Euro Cash 3M"
 conVincoloBenchmark<-1
 df_vincoliMultipliNomi<-read.csv2("vincolimultiplinomi.csv",header=T,stringsAsFactors = F) #il df non e' come nell'esempio, se c'e' un problema controllare (il problema è sorto, risolto con stringsAsFactors =F)
-df_vincoliSemplici<-read.csv2("vincolisemplicisenzaRiskFree.csv",header=T)
+df_vincoliSemplici<-read.csv2("vincolisemplici.csv",header=T)
 df_vincoliMultipliDati<-read.csv2("vincolimultiplidati.csv",header=T)[-1]
 names(df_vincoliMultipliDati)<-c("alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax")
 
@@ -2330,20 +2334,20 @@ pesi[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$P[complete.cases(ottimiz
 sharpe[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,3] #stessa cosa per lo sharpe ratio
 rporto[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,1]
 stdev[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,2]
+error<-abs(100*ottimizSenzaBench$optimalStdev[2,2]-4)
+
+#Ridefinizione estremi dei rendimenti secondo algoritmo di ricerca binaria 
 
 
-#Ridefinizione estremi dei rendimenti secondo algoritmo di massimizzazione "intervall reduction" (che non ha bisogno delle derivate)
+if (ottimizSenzaBench$optimalStdev[2,2]>stdevtarget) rfinale<-(riniziale+rfinale)/2 else riniziale<-(riniziale+rfinale)/2
 
-
-if (ottimizSenzaBench$optimalStdev[2,3]>ottimizSenzaBench$optimalStdev[3,3]) rfinale<-ottimizSenzaBench$optimalStdev[3,1] else riniziale<-ottimizSenzaBench$optimalStdev[2,1]
- error<-abs(ottimizSenzaBench$optimalStdev[2,3]-ottimizSenzaBench$optimalStdev[3,3])
 
 }
 })
 
 
 
-save.image('ottimizzazionedatistorici.RData')
+save.image('ottimizzazionedatistoriciVARtarget.RData')
 
 
 

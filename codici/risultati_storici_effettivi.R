@@ -2,7 +2,7 @@
 #cartella e libreria zoo per dataframe con serie storiche
 setwd("C:\\R\\r-output")
 library(zoo)
-load('ottimizzazionedatistorici.RData')
+load('ottimizzazionedatistoriciVARtarget.RData')
 
 #dataframe rendimenti effettivi
 reffettivi<-matrix(,ncol=1,nrow=nrperiodi)
@@ -100,7 +100,7 @@ risultatistorici$msquare<-msquare
 
 
 
-save.image('risultatistorici.RData')
+save.image('risultatistoriciVARtarget.RData')
 
 
 
@@ -109,13 +109,13 @@ save.image('risultatistorici.RData')
 
 
 #media storica per periodo
-mediastorica<-matrix(,ncol=14,nrow=19)
+'mediastorica<-matrix(,ncol=14,nrow=19)
 mediastorica<-zooreg(mediastorica,start=as.yearqtr(inizio,format ="%Y Q%q"),end=as.yearqtr(fine,format ="%Y Q%q"),frequency=4)
 for(j in index(mediastorica)){
 	primoytrmedia<-as.yearqtr(j,format ="%Y Q%q" )-nrrendimentixmedia*4/12
 	campionerendimenti<-window(rendimentiannualizzati,start=as.yearqtr(primoytrmedia,format ="%Y Q%q"),end=as.yearqtr(j,format ="%Y Q%q"))
 	mediastorica[as.yearqtr(j,format="%Y Q%q"),]<-apply(campionerendimenti,2,FUN=mean)
-}
+}'
 
 
 
