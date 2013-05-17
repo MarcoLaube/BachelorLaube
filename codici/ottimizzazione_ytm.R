@@ -10,7 +10,7 @@ nrrendimentixmedia<-10
 
 #errore e stdev target
 errortarget<-0.1 #in %
-stdevtarget<- 0.04
+stdevtarget<- 0.035
 
 
 
@@ -39,7 +39,7 @@ names(rporto)<-"Rendimento Portofolio Atteso"
 
 system.time(for (i in index(pesi)){
 #da debuggare quando non si fa partire il for
-			#i<-'2008 Q2'
+			#i<-'2001 Q3'
 			
 #comandi per calcolare le aspettative, il riskfree  e la massima vanno a costituire il range di rendimenti per l'ottimizzatore
 			ytm<-read.zoo("ytm.txt",format= "%d.%m.%Y")
@@ -73,16 +73,16 @@ system.time(for (i in index(pesi)){
 				df_vincoliMultipliDati<-read.csv2("vincolimultiplidati.csv",header=T)[-1]
 				names(df_vincoliMultipliDati)<-c("alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax")
 				
-#preparazione rendimenti (trimestrali e annualizzati)
-				rendimentigeometrici<-function(x) {diff(log(x))}
+#preparazione rendimenti trimestrali 
+				rendimentiaritmetici<-function(x) {((lag(x)/x))-1}
 				qtrtoyear<-function(x) (1+x)^4-1
 				datigiornalieri<-read.zoo("dati.txt", format ="%d.%m.%Y") 
 				
 				datitrimestrali<-aggregate(datigiornalieri,as.yearqtr,tail,1)
-				rendimentitrimestrali<-rendimentigeometrici(datitrimestrali)
-				rendimentiannualizzati<-qtrtoyear(rendimentitrimestrali)
+				rendimentitrimestrali<-rendimentiaritmetici(datitrimestrali)
 				
 				
+			
 				
 #preparazione aspettative
 				
@@ -101,11 +101,11 @@ system.time(for (i in index(pesi)){
 				nextwed<-function(x) 7 * ceiling(as.numeric(x-3+4) / 7) + as.Date(3-4) #trova il valore del mercoledi
 				weektoyear<-function(x) (1+x)^54-1
 				datisettimanali<-aggregate(datigiornalieri,nextwed,tail,1)
-				rendimentisettimanali<-rendimentigeometrici(datisettimanali)
-				rsettannual<-weektoyear(rendimentisettimanali)
+				rendimentisettimanali<-rendimentiaritmetici(datisettimanali)
 				
-				rendimentixcov<-window(rsettannual, start = start(rendimentisettimanali), end=as.Date(as.yearqtr(i)-0.25)) #estrae i dati dall'inizio fino al periodo corrente
-				covarianze<-cov(rendimentixcov)
+				
+				rendimentixcov<-window(rendimentisettimanali, start = start(rendimentisettimanali), end=as.Date(as.yearqtr(i)-0.25)) #estrae i dati dall'inizio fino al periodo corrente
+				covarianze<-52*cov(rendimentixcov)
 				v.nomiSerieStoriche<-t(v.nomiSerieStoriche)
 				colnames(covarianze)<-v.nomiSerieStoriche
 				

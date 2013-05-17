@@ -3,12 +3,12 @@ setwd("C:\\R\\r-output")
 library(zoo)
 
 
-#definizione periodo in cui si eseguono le ottimizzazioni,il nr di rendimenti utilizzati per la media storica,il doppio dell'errore consentito per il sharpe massimo
+#definizione periodo in cui si eseguono le ottimizzazioni,il nr di rendimenti utilizzati per la media storica
 inizio<-'2001 Q3'
 fine<-'2012 Q4'
 nrperiodi<-length(seq(as.yearqtr(inizio,format ="%Y Q%q"),as.yearqtr(fine,format ="%Y Q%q"),by=0.25))
 nrrendimentixmedia<-10
-errortarget<-0.02
+
 
 
 
@@ -34,30 +34,36 @@ rporto<-matrix(,ncol=1,nrow=nrperiodi)
 rporto<-zooreg(rporto,start=as.yearqtr(inizio,format ="%Y Q%q"),end=as.yearqtr(fine,format ="%Y Q%q"),frequency=4)
 names(rporto)<-"Rendimento Portofolio Atteso"
 
+#preparazione dataframe media storica
+mediastorica<-matrix(,ncol=17,nrow=nrperiodi)
+mediastorica<-zooreg(mediastorica,start=as.yearqtr(inizio,format ="%Y Q%q"),end=as.yearqtr(fine,format ="%Y Q%q"),frequency=4)
+
+
 #for per eseguire l'avanzamento temporale	
 
 system.time(for (i in index(pesi)){
 #da debuggare quando non si fa partire il for
-#i<-'2001 Q4'
+#i<-'2008 Q2'
 
 #comandi per calcolare le aspettative, il riskfree  e la massima vanno a costituire il range di rendimenti per l'ottimizzatore
-rendimentigeometrici<-function(x) {diff(log(x))}
+rendimentiaritmetici<-function(x) {((lag(x)/x))-1}
 qtrtoyear<-function(x) (1+x)^4-1
 datigiornalieri<-read.zoo("dati.txt", format ="%d.%m.%Y") 
 
 datitrimestrali<-aggregate(datigiornalieri,as.yearqtr,tail,1)
-rendimentitrimestrali<-rendimentigeometrici(datitrimestrali)
-rendimentiannualizzati<-qtrtoyear(rendimentitrimestrali)
+rendimentitrimestrali<-rendimentiaritmetici(datitrimestrali)
+
 primoytrmedia<-as.yearqtr(i,format ="%Y Q%q" )-0.25-nrrendimentixmedia/4 #definisce trimestre del primo elemento per la media storica
-campionerendimenti<-window(rendimentiannualizzati,start=as.yearqtr(primoytrmedia,format ="%Y Q%q"),end=as.yearqtr(i,format ="%Y Q%q")-0.25) #contiene solo i rendimenti per la media storica
+campionerendimenti<-window(rendimentitrimestrali,start=as.yearqtr(primoytrmedia,format ="%Y Q%q"),end=as.yearqtr(i,format ="%Y Q%q")-0.25) #contiene solo i rendimenti per la media storica#salvataggio media storica
 aspettative<-apply(campionerendimenti,2,FUN=mean) #calcolo media storica
+aspettative<-qtrtoyear(aspettative)
 
 riniziale<-as.numeric(aspettative[2])+0.001 #rendimento iniziale quello dell'Euro Cash perchè per caratteristiche si avvicina maggiormente al minvar (nell'ottimizzazione non vengono calcolati portofoglio con sharpe negativo)
 rfinale<-as.numeric(max(aspettative))-0.001
 
 #errore e stdev target
 errortarget<-0.1 #in %
-stdevtarget<- 0.04
+stdevtarget<- 0.035
 
 #inizializzazione errore permesso alla varianza per condizione while
 error<-100000
@@ -82,21 +88,24 @@ df_vincoliMultipliDati<-read.csv2("vincolimultiplidati.csv",header=T)[-1]
 names(df_vincoliMultipliDati)<-c("alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax","alMax")
 
 #preparazione rendimenti (trimestrali e annualizzati)
-rendimentigeometrici<-function(x) {diff(log(x))}
+rendimentiaritmetici<-function(x) {((lag(x)/x))-1}
 qtrtoyear<-function(x) (1+x)^4-1
 datigiornalieri<-read.zoo("dati.txt", format ="%d.%m.%Y") 
 
 datitrimestrali<-aggregate(datigiornalieri,as.yearqtr,tail,1)
-rendimentitrimestrali<-rendimentigeometrici(datitrimestrali)
-rendimentiannualizzati<-qtrtoyear(rendimentitrimestrali)
+rendimentitrimestrali<-rendimentiaritmetici(datitrimestrali)
+
 
 
 
 #preparazione aspettative
 
 primoytrmedia<-as.yearqtr(i,format ="%Y Q%q" )-nrrendimentixmedia/4-0.25 #definisce trimestre del primo elemento per la media storica
-campionerendimenti<-window(rendimentiannualizzati,start=as.yearqtr(primoytrmedia,format ="%Y Q%q"),end=as.yearqtr(i,format ="%Y Q%q")-0.25) #contiene solo i rendimenti per la media storica
+campionerendimenti<-window(rendimentitrimestrali,start=as.yearqtr(primoytrmedia,format ="%Y Q%q"),end=as.yearqtr(i,format ="%Y Q%q")-0.25) #contiene solo i rendimenti per la media storica
+mediastorica[as.yearqtr(i,format="%Y Q%q"),]<-apply(campionerendimenti,2,FUN=mean)
+names(mediastorica)<-t(v.nomiSerieStoriche)
 aspettative<-apply(campionerendimenti,2,FUN=mean) #calcolo media storica
+aspettative<-qtrtoyear(aspettative)
 
 aspettative<-cbind(v.nomiSerieStoriche,aspettative)
 names(aspettative)<-c("Name","E.r.")
@@ -106,13 +115,13 @@ names(aspettative)<-c("Name","E.r.")
 
 #calcolo matrice covarianza con i rendimenti settimanali calcolati il mercoledi, con i dati dall'inizio fino al periodo in considerazione
 nextwed<-function(x) 7 * ceiling(as.numeric(x-3+4) / 7) + as.Date(3-4) #trova il valore del mercoledi
-weektoyear<-function(x) (1+x)^54-1
-datisettimanali<-aggregate(datigiornalieri,nextwed,tail,1)
-rendimentisettimanali<-rendimentigeometrici(datisettimanali)
-rsettannual<-weektoyear(rendimentisettimanali)
 
-rendimentixcov<-window(rsettannual, start = start(rendimentisettimanali), end=as.Date(as.yearqtr(i)-0.25)) #estrae i dati dall'inizio fino al periodo corrente
-covarianze<-cov(rendimentixcov)
+datisettimanali<-aggregate(datigiornalieri,nextwed,tail,1)
+rendimentisettimanali<-rendimentiaritmetici(datisettimanali)
+
+
+rendimentixcov<-window(rendimentisettimanali, start = start(rendimentisettimanali), end=as.Date(as.yearqtr(i)-0.25)) #estrae i dati dall'inizio fino al periodo corrente
+covarianze<-52*cov(rendimentixcov) 
 v.nomiSerieStoriche<-t(v.nomiSerieStoriche)
 colnames(covarianze)<-v.nomiSerieStoriche
 
@@ -2097,7 +2106,7 @@ nbOptimizations = length(r.range)
 ## create the P matrix containing the optimal portfolio weights. The columns of
 ## the matrix contain the optimal weights given the desired level of expected return.
 ottimizSenzaBench$P = matrix(, ncol = nbOptimizations, nrow = datiVincoliQuadProg$nrPesi)
-dimnames(ottimizSenzaBench$P) <- list(colnames(m.aspettative),paste("E[R] = ",round(reportingScaleFactor*r.range*100,digits=4),"%",sep="")) #round a 4 cifre perche' seno' la ricerca binaria si blocca
+dimnames(ottimizSenzaBench$P) <- list(colnames(m.aspettative),paste("E[R] = ",round(reportingScaleFactor*r.range*100,digits=10),"%",sep="")) #round a 4 cifre perche' seno' la ricerca binaria si blocca
 ottimizConBench$P = ottimizSenzaBench$P
 
 
@@ -2334,7 +2343,7 @@ pesi[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$P[complete.cases(ottimiz
 sharpe[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,3] #stessa cosa per lo sharpe ratio
 rporto[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,1]
 stdev[as.yearqtr(i,format="%Y Q%q"),]<-ottimizSenzaBench$optimalStdev[2,2]
-error<-abs(100*ottimizSenzaBench$optimalStdev[2,2]-4)
+error<-abs(100*ottimizSenzaBench$optimalStdev[2,2]-100*stdevtarget)
 
 #Ridefinizione estremi dei rendimenti secondo algoritmo di ricerca binaria 
 

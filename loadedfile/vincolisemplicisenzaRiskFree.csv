@@ -1,0 +1,23 @@
+Name;Currency;equals;alMin;alMax
+CLASS RISK FREE;;;;
+Euro Cash 3M;EUR;0;;
+CLASS SHORT TERM;;;;
+Switzerland Cash 3M;CHF;;0;
+United States Cash 3M;USD;;0;
+CLASS GOVERNMENT BOND;;;;
+European Monetary Union Government 5 - 7 Years (E);EUR;;0;
+United States Treasury 5 - 7 Years ($);USD;;0;
+CLASS CORPORATE INV. GRADE;;;;
+United States Corporate BBB-A ($);USD;;0;
+European Monetary Union Corporate Excluding Pfand. BBB (E);EUR;;0;
+CLASS HIGH YIELD;;;;
+United States High Yield Master II. ($);USD;;0;
+European Currency Highyield (E);USD;;0;
+CLASS EMERGING BOND;;;;
+Embi Global Diversified Composite ($);EUR;;0;
+CLASS CONVERTIBLE BOND;;;;
+Convertible: European Monetary Union (E);USD;;0;
+United States and Canada Convertible Bond ($);EUR;;0;
+CLASS EQUITY ;;;;
+Dow Jones Euro STOXX 50 (E);USD;;0;
+Standard and Poors 500 Composite ($);EUR;;0;
