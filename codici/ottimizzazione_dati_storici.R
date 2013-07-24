@@ -62,7 +62,7 @@ riniziale<-as.numeric(aspettative[2])+0.001 #rendimento iniziale quello dell'Eur
 rfinale<-as.numeric(max(aspettative))-0.001
 
 #errore e stdev target
-errortarget<-0.1 #in %
+errortarget<-0.01 #in %
 stdevtarget<- 0.035
 
 #inizializzazione errore permesso alla varianza per condizione while

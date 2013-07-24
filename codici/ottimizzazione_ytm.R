@@ -9,7 +9,7 @@ nrperiodi<-length(seq(as.yearqtr(inizio,format ="%Y Q%q"),as.yearqtr(fine,format
 nrrendimentixmedia<-10
 
 #errore e stdev target
-errortarget<-0.1 #in %
+errortarget<-0.01 #in %
 stdevtarget<- 0.035
 
 

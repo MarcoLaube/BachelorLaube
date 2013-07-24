@@ -6,6 +6,7 @@ library(fBasics)
 library(Hmisc) #per Ecdf
 library(urca) #per dickker
 library(stats) #per shapiro
+
 #definizione periodo in cui si eseguono le ottimizzazioni,il nr di rendimenti utilizzati per la media storica
 inizio<-'2001 Q3'
 fine<-'2012 Q4'
@@ -415,7 +416,7 @@ mstor<-media(10)
 #mstor5<-media(5)
 
 # tabella statistica destrittiva
-tabstat<-write.table(round(stats(mstor)[,6:7],digits=2),sep="\t",col.names=F)
+tabstat<-write.table(round(diag(cor(ytms,mstor)),digits=4),sep="\t",col.names=F,row.names=F)
 
 #ecdf e densità
 
@@ -435,8 +436,16 @@ dev.off()
 
 #andamento mstor
 
-postscript("andamentomstor.eps")
-plot(mstor,xlab='Periodo',main='Andamento delle medie storiche')
+postscript("andamentomstor1.eps")
+
+for (i in 1:14){
+	
+
+	par(mfrow=c(7,2))
+	par(mar=c(100.1, 100.1, 100.1, 100.1), xpd=TRUE)
+	plot(mstor[,i])
+}
+
 dev.off()
 
 ##ytm
@@ -470,7 +479,7 @@ dev.off()
 
 #tabella statistica descrittiva
 
-write.table(round(stats2(ytms),digits=2)[,5],sep="\t",col.names=F,row.names=F)
+write.table(round(stats2(errorytms),digits=2)[,1:2],sep="\t",col.names=F,row.names=F)
 
 ##rendimenti realizzati
 #caricamento file
@@ -483,7 +492,7 @@ rreal<-window(rreal, start = start(mstor), end=end(mstor))
 names(rreal)<-names(mstor)
 
 
-
+errorytms
 
 #densita
 postscript("densitarreal.eps")
@@ -521,7 +530,7 @@ dev.off()
 #grafico esempio
 postscript("confrontoandamentorrealmstorUSgov.eps")
 par(mfrow=c(1,1))
-plot(rreal[,4],ylab=names(rreal)[,4],xlab='Periodo',main='Rendimenti realizzati e media storica per i governativi europei')
+plot(rreal[,4],ylab='Rendimento (%)',xlab='Periodo',main='Rendimenti realizzati e media storica per i governativi europei',col='blue')
 lines(mstor[,4],col='red')
 abline(a=mean(rreal[,4]),b=0,col='green')
 legend("bottomright",c('Rendimenti realizzati','Media Storica','Media rendimenti realizzati'),pch=19,col=c('blue','red','green'),cex=1)
@@ -534,7 +543,7 @@ denssep(errorms)
 dev.off()
 
 postscript("errormsvsrreal")
-plot(rreal[,14],main='Errore e rendimenti realizzati',xlab='Periodo',ylab=names(rreal)[,14])
+plot(rreal[,14],main='Errore e rendimenti realizzati',xlab='Periodo',ylab=names(rreal)[,14],col='blue')
 lines(errorms[,14],col='red')
 legend("bottomright",c('Rendimenti realizzati','Errore'),pch=19,col=c('blue','red'),cex=1)
 dev.off()
@@ -562,18 +571,17 @@ postscript("confrontoandamentorrealytms.eps")
 
 par(mfrow=c(1,2))
 
-plot(rreal[,4],ylab=names(rreal)[,4],xlab='Periodo')
+plot(rreal[,4],ylab='Rendimento (%)',xlab='Periodo',main='EuGov',col='blue')
 
 lines(ytms[,4],col='red')
 abline(a=mean(rreal[,4]),b=0,col='green')
 legend("bottomleft",c('Rendimenti realizzati','Rendimenti a scadenza','Media rendimenti realizzati'),pch=19,col=c('blue','red','green'),cex=1)
 
-plot(rreal[,3],ylab=names(rreal)[,3],xlab='Periodo')
+plot(rreal[,3],ylab='Rendimento (%)',xlab='Periodo',main='USCash',col='blue')
 lines(ytms[,3],col='red')
 abline(a=mean(rreal[,3]),b=0,col='green')
 legend("bottomleft",c('Rendimenti realizzati','Rendimenti a scadenza','Media rendimenti realizzati'),pch=19,col=c('blue','red','green'),cex=1)
 
-mtext("Rendimenti realizzati e a scadenza per i governativi europei e USCash", outer = TRUE, cex = 1.5)
 dev.off()
 
 errorytms<-rreal-ytms
@@ -582,9 +590,9 @@ denssep(errorytms)
 dev.off()
 
 postscript("errorytmsvsrreal.eps")
-plot(rreal[,14],main='Errore e rendimenti realizzati',xlab='Periodo',ylab=names(rreal)[,14])
-lines(errorytms[,14],col='red')
-legend("bottomright",c('Rendimenti realizzati','Errore'),pch=19,col=c('blue','red'),cex=0.7)
+plot(errorytms[,14],main='Errore e rendimenti realizzati per S&P500',xlab='Periodo',ylab='Rendimento (%)',col='blue')
+lines(rreal[,14],col='red')
+legend("bottomright",c('Errore','Rendimenti realizzati'),pch=19,col=c('blue','red'),cex=0.7)
 dev.off()
 
 ##confronto media storica ytms
@@ -600,8 +608,20 @@ dev.off()
 #grafico esempio
 postscript("confrontoandamentoytmsmstorEugov.eps")
 par(mfrow=c(1,1))
-plot(ytms[,4],ylim=c(-5,5),ylab=names(ytms)[,4],xlab='Periodo',main='Rendimenti a scadenza e media storica per i governativi europei')
+plot(ytms[,4],ylim=c(-5,5),ylab='Rendimento (%)',xlab='Periodo',main='Rendimenti a scadenza e media storica per i governativi europei',col='blue')
 lines(mstor[,4],col='red')
 legend("bottomright",c('Rendimenti a scadenza','Media Storica'),pch=19,col=c('blue','red'),cex=1)
 
 dev.off()
+
+#grafico confronto rreal ytms
+postscript("graphrrealvsytms.eps")
+curve(log(100)-log(x), to=100,xlim=c(80,102),ylim=c(0,0.2),col='red',main='Vari tipi di rendimenti in funzione del prezzo odierno',ylab='Rendimento (%)',xlab='Prezzo odierno')
+
+curve((100/x)-1,add=TRUE, col='green')
+curve(1/x, add=TRUE)
+curve(5/x,add=TRUE,col='blue')
+legend("topright",c('Rendimenti realizzati logaritmici','Rendimenti realizzati aritmetici','Rendimenti a scadenza con Coupon al 5%','Rendimenti a scadenza con Coupon al 1%'),pch=19,col=c('red','green','blue','black'),cex=1)
+dev.off()
+
+
